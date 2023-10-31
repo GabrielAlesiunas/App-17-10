@@ -1,24 +1,40 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Ionicons } from "@expo/vector-icons";
+import Cadastrar from "./components/cadastrar";
+import Listar from "./components/listar";
 
-// Application ID  QpMirY5FW0fORrbLm0jvfkJrXKMOtqIT6lLKHX6j
-// JavaScript key  efLWlwSpDT3hzjdqtArPvMQNmMC69RF808Q0dp8I
-
-
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const Tabs = createBottomTabNavigator();
+    export default function App() {
+    return (
+            <NavigationContainer>
+                <Tabs.Navigator
+                    screenOptions={{
+                        headerStyle:{
+                            backgroundColor: 'pink',            
+                        },
+                        headerTitleStyle:{
+                            color: "black",
+                            fontWeight: '100',            
+                        },
+                    }}
+                >
+                    <Tabs.Screen 
+                        name='Cadastrar' 
+                        component={Cadastrar}
+                        options={{
+                            tabBarIcon:({color,size})=>(<Ionicons name="ios-add-circle-outline" size={size} color={color} />)
+                          }}
+                    />
+                    <Tabs.Screen 
+                        name='Listar' 
+                        component={Listar} 
+                        options={{
+                            tabBarIcon:({color,size})=>(<Ionicons name="ios-list-circle-outline" size={size} color={color} />)
+                        }}
+                    />
+                </Tabs.Navigator>
+            </NavigationContainer>       
+        );
+    }
